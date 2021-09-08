@@ -19,9 +19,11 @@
     <p>パスワード</p>
     <input type="password" name="pass" id="password" class="200" onkeyup="setPasswordLevel(this.value);">
     <div id="pass_message"></div>
+
     <p>パスワード（確認）</p>
-    <input type="password" name="confirm_password" id="confirm_password" class="200" onkeyup="setConfirmMessage(this.value);">
+    <input type="password" name="pass2" id="confirm_password" class="200" onkeyup="setConfirmMessage(this.value);">
     <div id="pass_confirm_message"></div>
+
     <input type="button" onclick="history.back()" value="戻る">
     <input type="submit" value="OK">
     </form>

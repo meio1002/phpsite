@@ -12,14 +12,39 @@
 require_once('../common/common.php');
 $post = sanitize($_POST);
 
-$name = $_POST['name'];
-$pass = $_POST['pass'];
-$pass2 = $_POST['pass2'];
+$name = $post['name'];
+$pass = $post['pass'];
+$pass2 = $post['pass2'];
 
-print$name;
-print$pass;
-print$pass2;
+if($name ==''){
+    echo '<p class="alart">名前が入力されていません</p>';
+}else{
+    echo '<p>プレーヤーネーム：'.$name.'</p>';
+}
 
+if($pass ==''){
+    echo '<p>パスワードが入力されていません</p>';
+}
+
+if($pass != $pass2){
+    echo '<p>パスワードが一致しません</p>';
+}
+
+if($name =='' || $pass =='' || $pass != $pass2){
+    echo '<form>';
+    echo '<input type="button" onclick="history.back()" value="戻る">';
+    echo '</form>';
+}else{
+    $pass = password_hash($pass,PASSWORD_DEFAULT);
+    echo '<form method="post" action="player_add_done.php">';
+    echo '<div class="box1">';
+    echo '<input type="hidden" name="name" value="'.$name.'">';
+    echo '<input type="hidden" name="pass" value="'.$pass.'">';
+    echo '</div>';
+    echo '<input type="button" onclick="history.back()" value="戻る">';
+    echo '<input type="submit" value="OK">';
+    echo '</form>';
+}
 ?>
 </body>
 </html>
