@@ -10,7 +10,7 @@
     
 <?php
 
-echo $_POST['test_a'];
+// echo $_POST['test_a'];
 
 ?>
 

@@ -31,11 +31,12 @@ try{
     $dbh = null;
 
     echo '<p>プレイヤー'.$name.'を登録しました</p>';
-    echo '<form action="player_home.php" method="post">';
-    echo '<input type="hidden" name="name" value="' .$name. '">';
-    echo '<input type="hidden" name="pass" value="' .$pass. '">';
-    echo '<input type="submit" value="OK">';
-    echo '</form>';
+    echo '<a href="player_login.html">ログインへ</a>';
+    // echo '<form action="player_home.php" method="post">';
+    // echo '<input type="hidden" name="name" value="' .$name. '">';
+    // echo '<input type="hidden" name="pass" value="' .$pass. '">';
+    // echo '<input type="submit" value="OK">';
+    // echo '</form>';
 
 }
 catch (Exception $e)
