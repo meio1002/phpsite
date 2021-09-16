@@ -47,7 +47,11 @@ while(true)
 
     if(password_verify($login_pass, $rec['password'])){
         // print '認証成功';
-        header('Location: test_a.php');
+        session_start();
+        $_SESSION['login']=1;
+        $_SESSION['login_name']=$login_name;
+        $_SESSION['login_pass']=$rec['password'];
+        header('Location: player_home.php');
         exit();
         // break;
     }
@@ -77,8 +81,8 @@ while(true)
 
 catch (Exception $e)
 {
-    print'障害';
-    echo $e;
+    echo '<p>障害発生</p>';
+    echo '<a href="./player_login.html">戻る</a>';
     exit();
 }
 

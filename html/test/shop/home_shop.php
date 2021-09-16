@@ -18,7 +18,7 @@ else
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>プレイヤー情報</title>
+    <title>ショップ</title>
 </head>
 <body>
     
@@ -26,9 +26,6 @@ else
 
 try
 {
-    // require_once('../common/common.php');
-    // $post = sanitize($_POST);
-
     $name = $_SESSION['login_name'];
     $pass = $_SESSION['login_pass'];
 
@@ -45,49 +42,34 @@ $data[] = $name;
 $data[] = $pass;
 $stmt->execute($data);
 
+
+
 $dbh = null;
 
 echo '<h1>プレイヤー情報</h1>';
 
 $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-$_SESSION['vanish'] = 2;
+
 ?>
-<h1>プレイヤーネーム：<?php echo $rec['name']; ?></h1>
-<p>所持ポイント：<?php echo $rec['point']?></p>
-<p>バニッシュ[S]：<?php echo $rec['item1']?>個</p>
-<p>チェンジ[D]：<?php echo $rec['item2']?>個</p>
-<p>カット[F]：<?php echo $rec['item3']?>個</p>
+<div>
+    <div class="possession-list">
+        <h1>所持ポイント：<?php echo $rec['point']?></h1>
+        <div　class="possession-item-list">
+            <h2>所持アイテム</h2>
+            <p>バニッシュ[S]：<?php echo $rec['item1']?>個</p>
+            <p>チェンジ[D]：<?php echo $rec['item2']?>個</p>
+            <p>カット[F]：<?php echo $rec['item3']?>個</p>
+        </div>
+    </div>
+    <div class="shop-list">
+        <h1>SHOP</h1>
+        <div class="shop-item-list">
 
-<div class="home_post">
-<!-- <form method="post" action="teto_shop.php">
-    
-    <input type="submit" value="ショップへ">
-</form> -->
-<a href="./home_shop.php">ショップへ</a>
-
-<form method="post" action="../teto/teto.php">
-
-    <input type="submit" value="test_b">
-</form>
+        </div>
+    </div>
 </div>
+
 <?php
-// foreach ($rec as $value) {
-//     echo '<p>'.$value.'</p>';
-// }
-
-// while(true)
-// {
-    // $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-//     if($rec==false)
-//     {
-//         break;
-//     }
-    // foreach ($rec as $value) {
-    //     echo '<p>'.$value.'</p>';
-    // }
-//     // echo '<p>'.$rec['name'].'</p>';
-// }
-
 }
 catch(Exception $e)
 {

@@ -1,3 +1,18 @@
+<?php
+session_start();
+session_regenerate_id(true);
+if(isset($_SESSION['login'])==false)
+{
+    echo '<p>ログインされていません</p>';
+    echo '<a href="./player_login.html">ログイン画面へ</a>';
+    exit();
+}
+else
+{
+    echo '<p>プレイヤー<strong>'.$_SESSION['login_name'].'</strong> ログイン中</p>';
+
+}
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -10,7 +25,8 @@
     
 <?php
 
-echo $_POST['test_b'];
+// echo $_POST['test_b'];
+echo $_SESSION['login_pass'];
 
 ?>
 

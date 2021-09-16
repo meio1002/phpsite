@@ -1,7 +1,18 @@
 let score =100;
 let cutpoint = 2;
 let changepoint = 2;
-let vanishpoint = 1;
+// let vanishpoint = 1;
+// let vanishpoint;
+// let param = JSON.parse('<?php echo $aaa_json; ?>');
+// console.log(param);
+// let vanishpoint = param;
+
+new p5();
+
+
+// vanishpoint = Number(vanishpoint);
+
+
 class Block {
     constructor(x,y) {
         this.x = x;
@@ -266,11 +277,34 @@ function keyPressed() {
 //     console.log('seikou');
 // }
 
+
+// function setup() {
+//     createCanvas(500, 525);
+//     background(64);
+//     game = new Game();
+
+// }
+
 function setup() {
     createCanvas(500, 525);
     background(64);
     game = new Game();
+    // new Promise(function (resolve, reject){
+    //     try {
+    //         game = new Game();
+    //         resolve();
+    //     } catch (e) {
+    //         reject();
+    //     }
+        
+    // })
+
 }
+// start = document.getElementById('start');
+// start.addEventListener('click',function(){
+//     console.log('seikou')
+// });
+
 
 function draw() {
     game.proc();
