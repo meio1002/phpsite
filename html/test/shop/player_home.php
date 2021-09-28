@@ -51,6 +51,7 @@ echo '<h1>プレイヤー情報</h1>';
 
 $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 $_SESSION['vanish'] = 2;
+$_SESSION['cut'] = 3;
 ?>
 <h1>プレイヤーネーム：<?php echo $rec['name']; ?></h1>
 <p>所持ポイント：<?php echo $rec['point']?></p>

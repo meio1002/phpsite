@@ -1,5 +1,5 @@
 let score =100;
-let cutpoint = 2;
+// let cutpoint = 2;
 let changepoint = 2;
 // let vanishpoint = 1;
 // let vanishpoint;

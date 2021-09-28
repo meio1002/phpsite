@@ -31,10 +31,12 @@ else
     <?php
 
 $aaa = $_SESSION['vanish'];
+$bbb = $_SESSION['cut'];
 // print$aaa;
 // print$aaa*2;
 
 $aaa_json = json_encode( $aaa );
+$bbb_json = json_encode( $bbb );
 ?>
 
 <script>
@@ -42,6 +44,9 @@ $aaa_json = json_encode( $aaa );
     let param = JSON.parse('<?php echo $aaa_json; ?>');
     console.log(param);
     let vanishpoint = param;
+    let param2 = JSON.parse('<?php echo $bbb_json; ?>');
+    console.log(param2);
+    let cutpoint = param2;
 
 </script>
 
