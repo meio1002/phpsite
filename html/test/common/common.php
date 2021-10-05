@@ -1,5 +1,5 @@
 <?php
-
+// サニタイズ
 function sanitize($before)
 {
     
@@ -10,39 +10,15 @@ function sanitize($before)
     return $after;
 }
 
-// function henkan($before){
-
-//     switch($before){
-
-//         // バニッシュ
-//         case 'バニッシュ':
-//             $before = 'vanish';
-//             echo $before;
-//             break;
-//         case 'vanish':
-//             $before = 'バニッシュ';
-//             echo $before;
-//             break;
-//         // チェンジ
-//         case 'チェンジ':
-//             $before = 'change';
-//             echo $before;
-//             break;
-//         case 'change':
-//             $before = 'チェンジ';
-//             echo $before;
-//             break;
-//         // カット
-//         case 'カット':
-//             $before = 'cut';
-//             echo $before;
-//             break;
-//         case 'cut':
-//             $before = 'カット';
-//             echo $before;
-//             break;
-//         }
-
-// }
-
+// 正規表現チェック
+function RegularExpressions($before){
+foreach($before as $val) {
+    if(preg_match("/\A[0-9]+\z/",$val)==0)
+    {
+        echo'<p>数量に誤りがあります。</p>';
+        echo '<input type="button" onclick="history.back()" value="戻る">';
+        exit(); 
+    }
+}
+}
 ?>

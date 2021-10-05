@@ -11,7 +11,7 @@ new p5();
 
 
 // vanishpoint = Number(vanishpoint);
-
+{
 
 class Block {
     constructor(x,y) {
@@ -330,7 +330,7 @@ function draw() {
 }
 
 
-
+}
 
 // 実装したいこと
 // 1．テトリスに色を付ける

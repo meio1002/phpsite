@@ -90,7 +90,7 @@ $henkan['カット'] = 'cut';
             foreach($shopitem as $val){
                 echo '<div class="item">';
                 echo '<img src="../images/'.$val['gazou'].'" alt="'.$val['name'].'">';
-                echo '<label for="'.$henkan[$val['name']].'value">'.$val['name'].'</label>';
+                echo '<label for="'.$henkan[$val['name']].'value">'.$val['name'].'：'.$val['value'].'</label>';
                 echo '<input type="number" name="'.$henkan[$val['name']].'" id="'.$henkan[$val['name']].'value" min="0" max="10" value="0">';
                 echo '</div>';
             }
@@ -107,6 +107,7 @@ $henkan['カット'] = 'cut';
 catch(Exception $e)
 {
     echo '<p>ただいま障害により大変ご迷惑をお掛けしております。</p>';
+    echo '<input type="button" onclick="history.back()" value="戻る">';
     exit();
 }
 

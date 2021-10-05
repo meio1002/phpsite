@@ -50,8 +50,9 @@ $dbh = null;
 echo '<h1>プレイヤー情報</h1>';
 
 $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-$_SESSION['vanish'] = 2;
+$_SESSION['vanish'] = 2; // あとでけす
 $_SESSION['cut'] = 3;
+// var_dump($_SESSION);
 ?>
 <h1>プレイヤーネーム：<?php echo $rec['name']; ?></h1>
 <p>所持ポイント：<?php echo $rec['point']?></p>
@@ -66,12 +67,15 @@ $_SESSION['cut'] = 3;
 </form> -->
 <a href="./home_shop.php">ショップへ</a>
 
-<form method="post" action="../teto/teto.php">
-
+<form method="post" action="../teto/teto_item_check.php">
+    <div class="teto-item"><label for="vanish">バニッシュ[S]<input type="number" name="vanish" id="vanish" value="0" min="0" max="<?php echo $rec['item1']; ?>">個</label></div>
+    <div class="teto-item"><label for="change">チェンジ[D]<input type="number" name="change" id="change" value="0" min="0" max="<?php echo $rec['item2']; ?>">個</label></div>
+    <div class="teto-item"><label for="cut">カット[F]<input type="number" name="cut" id="cut" value="0" min="0" max="<?php echo $rec['item3']; ?>">個</label></div>
     <input type="submit" value="test_b">
 </form>
 </div>
 <?php
+var_dump($rec);
 // foreach ($rec as $value) {
 //     echo '<p>'.$value.'</p>';
 // }

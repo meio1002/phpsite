@@ -45,29 +45,31 @@ foreach($post as $key => $val){
 // 商品有無判定 /////////////////////////////////////////////////////////////
 if (isset($buy) === true){
 // 値段合計 /////////////////////////////////////////////////////////////////
- $aaa = 0;
+ $value = 0;
  foreach ($buy as $key => $val){
     // バニッシュ
     if ($key === 'vanish'){
-        $aaa += $val * 2000;
+        $value += $val * 2000;
     }
     // チェンジ
     if ($key === 'change'){
-        $aaa += $val * 1500;
+        $value += $val * 1500;
     }
     // カット
     if ($key === 'cut'){
-        $aaa += $val * 1000;
+        $value += $val * 1000;
     }
 
 } // 値段合計 end
 
 // 購入判定 //////////////////////////////////////////////////////////////
-if ($point - $aaa >= 0){
+$balance = $point - $value;
+if ($balance >= 0){
     foreach ($buy as $key => $val){
         $cart[$key] = $val;
     }
     $_SESSION['cart'] = $cart;
+    $_SESSION['balance'] = $balance;
     header('Location:test_c.php');
     exit();
 }else{
@@ -86,6 +88,7 @@ if ($point - $aaa >= 0){
 catch(Exception $e)
 {
     echo '<p>ただいま障害により大変ご迷惑をお掛けしております。</p>';
+    echo '<input type="button" onclick="history.back()" value="戻る">';
     exit();
 }
 
