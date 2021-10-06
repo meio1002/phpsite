@@ -53,8 +53,8 @@ try{
         }
     }
 
-// $itemと$postを比較して問題がなければ購入後の残りアイテム数を$hhhに記録
-    $hhh = array();
+// $itemと$postを比較して問題がなければ購入後の残りアイテム数を$stockに記録
+    $stock = array();
     foreach($item as $itemkey => $itemval){
         foreach($post as $postkey => $postval){
             if ($itemkey === $postkey){ // $key判定
@@ -64,15 +64,36 @@ try{
                     exit();
                 } else {
                     // 購入後の残りアイテム数
-                    $hhh[$itemkey] = $itemval - $postval;
+                    $stock[$itemkey] = $itemval - $postval;
+                    // $stock[$itemkey] = 9999;
                 } // 購入判定 end
             } // $key判定 end
         } // $postループ end
     } // $itemループend
     
 
-    // $post配列が順番が入れ替わっていた場合に備えて$hhhをなにかしらの手段で整列させてからデータべースに格納しなければいけない必要がある
-    var_dump($hhh);
+    // $post配列が順番が入れ替わっていた場合に備えて$stockをなにかしらの手段で整列させてからデータべースに格納しなければいけない必要がある
+
+    $dbh  = new PDO($dsn,$user,$password);
+    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $sql = 'UPDATE player SET item1 = ? , item2 = ? , item3 = ? WHERE name = ? and password = ?';
+    $stmt = $dbh->prepare($sql);
+    $data =array();
+    $data[] = $stock['vanish'];
+    $data[] = $stock['change'];
+    $data[] = $stock['cut'];
+    $data[] = $name;
+    $data[] = $pass;
+    $stmt->execute($data);
+    
+    $dbh = null;
+
+foreach($post as $key => $val){
+    $_SESSION[$key] = (int)$val;
+}
+    header('Location:teto.php');
+    exit();
 // 変換したアイテム所持情報と$postを比較
 
 //     if ($item !== $post){

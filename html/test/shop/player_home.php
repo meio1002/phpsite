@@ -32,6 +32,7 @@ try
     $name = $_SESSION['login_name'];
     $pass = $_SESSION['login_pass'];
 
+
 $dsn= 'mysql:dbname=teto;host=mysql;charset=utf8';
 $user ='root';
 $password = 'testaaa';
@@ -52,7 +53,8 @@ echo '<h1>プレイヤー情報</h1>';
 $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 $_SESSION['vanish'] = 2; // あとでけす
 $_SESSION['cut'] = 3;
-// var_dump($_SESSION);
+var_dump($_SESSION);
+
 ?>
 <h1>プレイヤーネーム：<?php echo $rec['name']; ?></h1>
 <p>所持ポイント：<?php echo $rec['point']?></p>
@@ -74,8 +76,9 @@ $_SESSION['cut'] = 3;
     <input type="submit" value="test_b">
 </form>
 </div>
+<a href="player_logout.php">ログアウト</a>
 <?php
-var_dump($rec);
+// var_dump($rec);
 // foreach ($rec as $value) {
 //     echo '<p>'.$value.'</p>';
 // }

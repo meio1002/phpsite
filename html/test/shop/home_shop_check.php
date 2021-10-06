@@ -70,7 +70,7 @@ if ($balance >= 0){
     }
     $_SESSION['cart'] = $cart;
     $_SESSION['balance'] = $balance;
-    header('Location:test_c.php');
+    header('Location:home_shop_done.php');
     exit();
 }else{
     echo '<p>購入できませんでした</p>';

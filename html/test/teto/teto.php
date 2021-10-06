@@ -30,23 +30,31 @@ else
 
     <?php
 
-$aaa = $_SESSION['vanish'];
-$bbb = $_SESSION['cut'];
-// print$aaa;
-// print$aaa*2;
 
-$aaa_json = json_encode( $aaa );
-$bbb_json = json_encode( $bbb );
+$vanish = $_SESSION['vanish'];
+$change = $_SESSION['change'];
+$cut = $_SESSION['cut'];
+
+// unset($_SESSION['vanish']);
+// unset($_SESSION['change']);
+// unset($_SESSION['cut']);
+
+$vanish_json = json_encode($vanish);
+$change_json = json_encode($change);
+$cut_json = json_encode($cut);
+
 ?>
 
 <script>
 
-    let param = JSON.parse('<?php echo $aaa_json; ?>');
-    console.log(param);
-    let vanishpoint = param;
-    let param2 = JSON.parse('<?php echo $bbb_json; ?>');
-    console.log(param2);
-    let cutpoint = param2;
+  let vanish = JSON.parse('<?php echo $vanish_json; ?>');
+  let vanishpoint = 1 + vanish;
+
+  let change = JSON.parse('<?php echo $change_json; ?>');
+  let changepoint = 2 + change;
+
+  let cut = JSON.parse('<?php echo $cut_json; ?>');
+  let cutpoint = 3 + cut;
 
 </script>
 
