@@ -11,28 +11,27 @@ if(isset($_SESSION['login'])==false)
 try{
     require_once('../common/common.php');
     $post = sanitize($_POST);
-    RegularExpressions($post);
+    if(RegularExpressions($post) === true){
+        echo'<p>数量に誤りがあります。</p>';
+        echo '<input type="button" onclick="history.back()" value="戻る">';
+        exit(); 
+    }
 
     $name = $_SESSION['login_name'];
-    $pass = $_SESSION['login_pass'];
+    $id = $_SESSION['login_id'];
 
     $dsn= 'mysql:dbname=teto;host=mysql;charset=utf8';
-    $user ='root';
-    $password = 'testaaa';
+    $user ='sample_user';
+    $password = 'sample_pass';
     $dbh  = new PDO($dsn,$user,$password);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql = 'SELECT item1,item2,item3 FROM player where name = ? and password = ?';
+    $sql = 'SELECT item1,item2,item3 FROM player where name = ? and id = ?';
     $stmt = $dbh->prepare($sql);
     $data[] = $name;
-    $data[] = $pass;
+    $data[] = $id;
     $stmt->execute($data);
     $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    // $sql = 'SELECT name,item1,item2,item3 FROM player where name = ? and password = ?';
-    // $stmt = $dbh->prepare($sql);
-    // $stmt->execute($data);
-    // $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
     $dbh = null;
 
@@ -65,26 +64,23 @@ try{
                 } else {
                     // 購入後の残りアイテム数
                     $stock[$itemkey] = $itemval - $postval;
-                    // $stock[$itemkey] = 9999;
                 } // 購入判定 end
             } // $key判定 end
         } // $postループ end
     } // $itemループend
     
 
-    // $post配列が順番が入れ替わっていた場合に備えて$stockをなにかしらの手段で整列させてからデータべースに格納しなければいけない必要がある
-
     $dbh  = new PDO($dsn,$user,$password);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql = 'UPDATE player SET item1 = ? , item2 = ? , item3 = ? WHERE name = ? and password = ?';
+    $sql = 'UPDATE player SET item1 = ? , item2 = ? , item3 = ? WHERE name = ? and id = ?';
     $stmt = $dbh->prepare($sql);
     $data =array();
     $data[] = $stock['vanish'];
     $data[] = $stock['change'];
     $data[] = $stock['cut'];
     $data[] = $name;
-    $data[] = $pass;
+    $data[] = $id;
     $stmt->execute($data);
     
     $dbh = null;
@@ -94,36 +90,7 @@ foreach($post as $key => $val){
 }
     header('Location:teto.php');
     exit();
-// 変換したアイテム所持情報と$postを比較
 
-//     if ($item !== $post){
-        
-//     }else {
-//         echo '<p>アイテムが不足しています</p>';
-//         echo '<input type="button" onclick="history.back()" value="戻る">';
-//         // exit();
-//     }
-// $test = array_diff($post,$item);
-// var_dump($test);
-
-    // if($item == $post) {
-    //     echo '1';
-    // }else{echo '2';}
-    // $test = array_diff($item,$post);
-    // $test = array_diff($rec,$post);
-    // $dbh  = new PDO($dsn,$user,$password);
-    // $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    // $sql = 'SELECT name,item1,item2,item3 FROM player where name = ? and password = ?';
-    // $stmt = $dbh->prepare($sql);
-    // $stmt->execute($data);
-    // $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    // $dbh = null;
-
-    // var_dump($test);
-    // var_dump($rec);
-    // var_dump($item);
 }
 catch(Exception $e)
 {

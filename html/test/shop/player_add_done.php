@@ -17,8 +17,8 @@ try{
     $pass = $post['pass'];
 
     $dsn= 'mysql:dbname=teto;host=mysql;charset=utf8';
-    $user ='root';
-    $password = 'testaaa';
+    $user ='sample_user';
+    $password = 'sample_pass';
     $dbh  = new PDO($dsn,$user,$password);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -27,16 +27,14 @@ try{
     $data[] = $name;
     $data[] = $pass;
     $stmt->execute($data);
+    // $stmt->execute();
+
 
     $dbh = null;
 
     echo '<p>プレイヤー'.$name.'を登録しました</p>';
     echo '<a href="player_login.html">ログインへ</a>';
-    // echo '<form action="player_home.php" method="post">';
-    // echo '<input type="hidden" name="name" value="' .$name. '">';
-    // echo '<input type="hidden" name="pass" value="' .$pass. '">';
-    // echo '<input type="submit" value="OK">';
-    // echo '</form>';
+
 
 }
 catch (Exception $e)

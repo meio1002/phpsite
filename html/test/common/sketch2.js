@@ -150,6 +150,44 @@ class Game {
         background(64);
         fill(255);
         text("GAME OVER",30,250);
+
+        const btn = document.createElement('button');
+        btn.setAttribute('id' ,'$btn');
+        btn.setAttribute('class','fff');
+        // btn.setAttribute('style','font-size:30px;position: relative;top: -35%;left: 41%;');
+        btn.innerHTML = '次へ';
+        document.body.append(btn);
+
+        $btn.onclick = (e) =>{
+            const form = document.createElement('form');
+            form.action = 'teto_score_check.php';
+            form.method = 'POST';
+            document.body.append(form);
+
+            form.addEventListener('formdata', (e) => {
+                var fd = e.formData;
+
+                fd.set('score',score);
+            });
+
+            form.submit();
+        };
+        // window.onload = function() {
+        //     const form = document.createElement('form');
+        //     form.action = '../test.php';
+        //     form.method = 'POST';
+    
+        //     document.body.append(form);
+    
+        //     form.addEventLister('formdata', (e) => {
+        //         const fd = e.formData;
+    
+        //         fd.set('score',score);
+        //     });
+    
+        //     form.submit();
+        // }
+
     }
 
     stop() {

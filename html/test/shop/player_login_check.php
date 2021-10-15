@@ -9,31 +9,18 @@ try
     $login_pass =$post['pass'];
 
     $dsn= 'mysql:dbname=teto;host=mysql;charset=utf8';
-    $user ='root';
-    $password = 'testaaa';
+    $user ='sample_user';
+    $password = 'sample_pass';
     $dbh  = new PDO($dsn,$user,$password);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql = 'SELECT name,password FROM player where name=?';
+    $sql = 'SELECT id,name,password FROM player where name=?';
     $stmt = $dbh->prepare($sql);
     $data[] = $login_name;
-    // $stmt->execute();
+
     $stmt->execute($data);
 
     $dbh = null;
-    // $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-
-    // if ($rec['password'] == '$2y$10$NZ29U9x5MvufvfO4x7oKi.wCq95sX21LSHimzNQFb.Pz7vwaW6tqy'){
-    //     echo 'OK';
-    // }
-    // else {
-    //     echo 'NG';
-    // }
-
-    // foreach ($rec as $v){
-    //     print $v;
-    // }
 
 while(true)
 {
@@ -46,35 +33,17 @@ while(true)
     }
 
     if(password_verify($login_pass, $rec['password'])){
-        // print '認証成功';
         session_start();
         $_SESSION['login']=1;
         $_SESSION['login_name']=$login_name;
-        $_SESSION['login_pass']=$rec['password'];
+        $_SESSION['login_id']=$rec['id'];
         header('Location: player_home.php');
         exit();
         // break;
     }
-    // }else{
-    //     print '認証失敗';
-    // }
-    // if ($rec['password'] == '$2y$10$NZ29U9x5MvufvfO4x7oKi.wCq95sX21LSHimzNQFb.Pz7vwaW6tqy'){
-    //     echo 'OK';
-    // }
-    // else {
-    //     echo 'NG';
-    // }
-    // foreach ($rec as $value) {
-    //     echo '<p>'.$value.'</p>';
-    // }
+
 }
 
-
-//     foreach ($rec as $value) {
-//         echo '<p>'.$value.'</p>';
-//     }
-//     // echo '<p>'.$rec['name'].'</p>';
-// }
     exit();
 
 }
@@ -85,6 +54,3 @@ catch (Exception $e)
     echo '<a href="./player_login.html">戻る</a>';
     exit();
 }
-
-
-?>

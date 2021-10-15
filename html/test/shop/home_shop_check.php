@@ -14,20 +14,20 @@ try {
     $post = sanitize($_POST);
 
     $name = $_SESSION['login_name'];
-    $pass = $_SESSION['login_pass'];
+    $id = $_SESSION['login_id'];
 
     $dsn= 'mysql:dbname=teto;host=mysql;charset=utf8';
-    $user ='root';
-    $password = 'testaaa';
+    $user ='sample_user';
+    $password = 'sample_pass';
     $dbh  = new PDO($dsn,$user,$password);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
 
-    $sql = 'SELECT point FROM player where name = ? and password = ?';
+    $sql = 'SELECT point FROM player where name = ? and id = ?';
     $stmt = $dbh->prepare($sql);
     $data[] = $name;
-    $data[] = $pass;
+    $data[] = $id;
     $stmt->execute($data);
     
     $dbh = null;

@@ -1,9 +1,22 @@
+.flex {
+    display: flex;
+}
+.rm {
+    margin-right: 100px;
+}
 
+.teto-item {
+    margin: 16px 0;
+}
 
+.bm {
+    margin-bottom: 50px;
+}
 
 /* home_shop.php //////////////////////////////////////////////////////////////////////////////////////// */
 .item {
     display: flex;
+    margin: 10px 0;
 }
 
 .item img {

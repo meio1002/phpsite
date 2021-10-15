@@ -25,6 +25,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: testaaa
         # sample_root_passward
-      MYSQL_DATABASE: sample_db
+      # MYSQL_DATABASE: sample_db
+      MYSQL_DATABASE: teto
       MYSQL_USER: sample_user
       MYSQL_PASSWORD: sample_pass

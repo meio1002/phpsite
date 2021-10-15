@@ -19,7 +19,7 @@ else
   <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="./style.css">
     <meta charset="utf-8" />
     <title>テトリス</title>
   </head>
@@ -27,7 +27,7 @@ else
     <div id="test" class="test">
 
     </div>
-
+  <input type="hidden" name="0" class="fff">
     <?php
 
 
@@ -35,9 +35,6 @@ $vanish = $_SESSION['vanish'];
 $change = $_SESSION['change'];
 $cut = $_SESSION['cut'];
 
-// unset($_SESSION['vanish']);
-// unset($_SESSION['change']);
-// unset($_SESSION['cut']);
 
 $vanish_json = json_encode($vanish);
 $change_json = json_encode($change);

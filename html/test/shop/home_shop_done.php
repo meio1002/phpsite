@@ -28,20 +28,20 @@ try {
     $cart = $_SESSION['cart'];
     $balance = $_SESSION['balance'];
     $name = $_SESSION['login_name'];
-    $pass = $_SESSION['login_pass'];
+    $id = $_SESSION['login_id'];
     
 // 購入前のアイテム所持数を取得
     $dsn= 'mysql:dbname=teto;host=mysql;charset=utf8';
-    $user ='root';
-    $password = 'testaaa';
+    $user ='sample_user';
+    $password = 'sample_pass';
     $dbh  = new PDO($dsn,$user,$password);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql = 'SELECT item1,item2,item3 FROM player where name = ? and password = ?';
+    $sql = 'SELECT item1,item2,item3 FROM player where name = ? and id = ?';
     $stmt = $dbh->prepare($sql);
     $data = array();
     $data[] = $name;
-    $data[] = $pass;
+    $data[] = $id;
     $stmt->execute($data);
 
     $rec = $rec = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -59,7 +59,7 @@ try {
     $dbh  = new PDO($dsn,$user,$password);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql = 'UPDATE player SET item1 = ? , item2 = ? , item3 = ? , point = ? WHERE name = ? and password = ?';
+    $sql = 'UPDATE player SET item1 = ? , item2 = ? , item3 = ? , point = ? WHERE name = ? and id = ?';
     $stmt = $dbh->prepare($sql);
     $data = array();
     $data[] = $stock['vanish'];
@@ -67,9 +67,9 @@ try {
     $data[] = $stock['cut'];
     $data[] = $balance;
     $data[] = $name;
-    $data[] = $pass;
+    $data[] = $id;
     $stmt->execute($data);
-    
+
     $dbh = null;
 
     unset($_SESSION['cart']);

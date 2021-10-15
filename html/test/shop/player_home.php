@@ -18,6 +18,7 @@ else
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
     <title>プレイヤー情報</title>
 </head>
 <body>
@@ -26,24 +27,20 @@ else
 
 try
 {
-    // require_once('../common/common.php');
-    // $post = sanitize($_POST);
 
     $name = $_SESSION['login_name'];
-    $pass = $_SESSION['login_pass'];
-
+    $id = $_SESSION['login_id'];
 
 $dsn= 'mysql:dbname=teto;host=mysql;charset=utf8';
-$user ='root';
-$password = 'testaaa';
+$user ='sample_user';
+$password = 'sample_pass';
 $dbh  = new PDO($dsn,$user,$password);
 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// $sql = 'SELECT name FROM player ';
-$sql = 'SELECT name,point,item1,item2,item3 FROM player where name = ? and password = ?';
+$sql = 'SELECT name,point,item1,item2,item3 FROM player where name = ? and id = ?';
 $stmt = $dbh->prepare($sql);
 $data[] = $name;
-$data[] = $pass;
+$data[] = $id;
 $stmt->execute($data);
 
 $dbh = null;
@@ -51,50 +48,37 @@ $dbh = null;
 echo '<h1>プレイヤー情報</h1>';
 
 $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-$_SESSION['vanish'] = 2; // あとでけす
-$_SESSION['cut'] = 3;
-var_dump($_SESSION);
 
 ?>
-<h1>プレイヤーネーム：<?php echo $rec['name']; ?></h1>
-<p>所持ポイント：<?php echo $rec['point']?></p>
-<p>バニッシュ[S]：<?php echo $rec['item1']?>個</p>
-<p>チェンジ[D]：<?php echo $rec['item2']?>個</p>
-<p>カット[F]：<?php echo $rec['item3']?>個</p>
+
+<div class="flex bm">
+
+<div class="home_shop rm">
+    <h1>プレイヤーネーム：<?php echo $rec['name']; ?></h1>
+    <p>所持ポイント：<?php echo $rec['point']?></p>
+    <p>バニッシュ[S]：<?php echo $rec['item1']?>個</p>
+    <p>チェンジ[D]：<?php echo $rec['item2']?>個</p>
+    <p>カット[F]：<?php echo $rec['item3']?>個</p>
+
+    <a href="./home_shop.php">ショップへ</a>
+    
+</div>
 
 <div class="home_post">
-<!-- <form method="post" action="teto_shop.php">
-    
-    <input type="submit" value="ショップへ">
-</form> -->
-<a href="./home_shop.php">ショップへ</a>
 
+
+<h1>持ち込みアイテム</h1>
 <form method="post" action="../teto/teto_item_check.php">
     <div class="teto-item"><label for="vanish">バニッシュ[S]<input type="number" name="vanish" id="vanish" value="0" min="0" max="<?php echo $rec['item1']; ?>">個</label></div>
     <div class="teto-item"><label for="change">チェンジ[D]<input type="number" name="change" id="change" value="0" min="0" max="<?php echo $rec['item2']; ?>">個</label></div>
     <div class="teto-item"><label for="cut">カット[F]<input type="number" name="cut" id="cut" value="0" min="0" max="<?php echo $rec['item3']; ?>">個</label></div>
-    <input type="submit" value="test_b">
+    <input type="submit" value="テトリスをプレイする">
 </form>
+</div>
+
 </div>
 <a href="player_logout.php">ログアウト</a>
 <?php
-// var_dump($rec);
-// foreach ($rec as $value) {
-//     echo '<p>'.$value.'</p>';
-// }
-
-// while(true)
-// {
-    // $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-//     if($rec==false)
-//     {
-//         break;
-//     }
-    // foreach ($rec as $value) {
-    //     echo '<p>'.$value.'</p>';
-    // }
-//     // echo '<p>'.$rec['name'].'</p>';
-// }
 
 }
 catch(Exception $e)

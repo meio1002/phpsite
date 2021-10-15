@@ -19,7 +19,11 @@ $pass2 = $post['pass2'];
 if($name ==''){
     echo '<p class="alart">名前が入力されていません</p>';
 }else{
-    echo '<p>プレーヤーネーム：'.$name.'</p>';
+    if(mb_strlen($name) > 30){
+        echo '<p>プレイヤーネームは30文字以内で入力してください</p>';
+    }else {
+        echo '<p>プレーヤーネーム：'.$name.'</p>';
+    }
 }
 
 if($pass ==''){

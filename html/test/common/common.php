@@ -15,9 +15,10 @@ function RegularExpressions($before){
 foreach($before as $val) {
     if(preg_match("/\A[0-9]+\z/",$val)==0)
     {
-        echo'<p>数量に誤りがあります。</p>';
-        echo '<input type="button" onclick="history.back()" value="戻る">';
-        exit(); 
+        return true;
+        // echo'<p>数量に誤りがあります。</p>';
+        // echo '<input type="button" onclick="history.back()" value="戻る">';
+        // exit(); 
     }
 }
 }
